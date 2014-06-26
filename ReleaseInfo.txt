@@ -1,0 +1,22 @@
+* Author: Dhawal Srivastava
+* Author: Navin Chaganti
+* Graduate Student
+* Software Engineering Concept
+* ECE-573
+* University Of Arizona
+
+Version 1.2
+Final Release .
+- Implemented the Demo class .
+* Junit test cases for all the A requirements( A.1.1,A.1.2,A.2,A.3,A.6 and A.7.)
+
+Version 1.1
+Final Release .
+- Implemented the SignalProcessing and Roadevent class
++ Implemented All the 5 algorithms 
+* Junit test cases for all the B requirements 
+
+
+Version 0.1
+Alpha Release
+- Implemented Accelerometer Fetch and Gps class

@@ -1,0 +1,20 @@
+* Author: Dhawal Srivastava
+* Author: Navin Chaganti
+* Graduate Student
+* Software Engineering Concept
+* ECE-573
+* University Of Arizona
+
+
+Application Installation
+Following steps should be followed while installing the application on an android device
+These steps are defined for Nexus 7 for android version: 4.4.2. (Preferably run on API-19)
+1.	Checkout the whole folder c2d from SVN location trunk/ to your local computer directory.
+2.	Open the checked out directory and locate PotholeMapper.apk at: trunk/c2d/src/android/PotholeMapper/bin/PotholeMapper.apk.
+3.	Connect the mobile device to the local computer.
+4.	Check the Unknown Sources box in the security settings of the device to ensure that project obtained from sources other than Play Store works on the deivce.
+5.	Copy the PotholeMapper.apk to the device.
+6.	Open FileManager on the device to install the PotholeMapper.apk. When asked for confirmation, Click Install.
+7.	The application is installed.
+
+Note: For bulding the source code. Refer the folder root/src/android/readme

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: Dhawal Srivastava -->
+<!-- Graduate Student -->
+<!-- Software Engineering Concept -->
+<!-- ECE-573 -->
+<!-- University Of Arizona -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/buttonspeedincrement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:onClick="Speedincrement"
+        android:text="@string/Speedincr" />
+
+    <Button
+        android:id="@+id/buttonsmoothroad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/buttonpothole"
+        android:layout_marginBottom="8dp"
+        android:onClick="SmoothRoad"
+        android:text="@string/SmoothRoad" />
+
+    <Button
+        android:id="@+id/buttonpothole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/buttonspeedbump"
+        android:layout_marginBottom="8dp"
+        android:onClick="Pothole"
+        android:text="@string/Pothole" />
+
+    <TextView
+        android:id="@+id/lat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/buttongps"
+        android:layout_toLeftOf="@+id/longt"
+        android:gravity="center"
+        android:text="@string/GPSLat" />
+
+    <Button
+        android:id="@+id/buttonspeeddecrement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/buttonspeedincrement"
+        android:onClick="Speeddecrement"
+        android:text="@string/Speeddecr" />
+
+    <TextView
+        android:id="@+id/speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonspeeddecrement"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/buttonspeedincrement"
+        android:gravity = "center"
+        android:text="@string/Speed" />
+
+    <Button
+        android:id="@+id/buttongps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/speed"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/buttonspeeddecrement"
+        android:onClick="GPS"
+        android:text="@string/GPSIncrement" />
+
+    <Button
+        android:id="@+id/buttonfinish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="Finish"
+        android:text="@string/Finish" />
+
+    <Button
+        android:id="@+id/buttonbreak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonphonedrop"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="8dp"
+        android:onClick="Break"
+        android:text="@string/Break" />
+
+    <TextView
+        android:id="@+id/longt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lat"
+        android:layout_alignBottom="@+id/lat"
+        android:layout_alignRight="@+id/buttongps"
+        android:text="@string/GPSLong" />
+
+    <Button
+        android:id="@+id/buttonphonedrop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonfinish"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="18dp"
+        android:onClick="PhoneDrop"
+        android:text="@string/PhoneDrop" />
+
+    <Button
+        android:id="@+id/buttonspeedbump"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/buttonbreak"
+        android:layout_marginBottom="8dp"
+        android:onClick="SpeedBump"
+        android:text="@string/SpeedBump" />
+
+</RelativeLayout>

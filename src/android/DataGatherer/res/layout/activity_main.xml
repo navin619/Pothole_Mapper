@@ -1,0 +1,157 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/textProjectInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/One" />
+
+    <TextView
+        android:id="@+id/xvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textProjectInfo"
+        android:layout_marginTop="44dp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/RecordTopic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="22dp"
+        android:gravity="center"
+        android:text="@string/RecordTopic"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/yvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/xvalue"
+        android:layout_below="@+id/xvalue"
+        android:layout_marginTop="22dp"
+        android:visibility="invisible" />
+    
+    <TextView
+        android:id="@+id/speedvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/xvalue"
+        android:layout_below="@+id/controlbutton"
+        android:layout_marginTop="10dp"
+        android:text="@string/initial_value" />
+    
+    
+    <TextView
+        android:id="@+id/zvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textProjectInfo"
+        android:layout_below="@+id/yvalue"
+        android:layout_marginTop="22dp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/emailbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textProjectInfo"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:onClick="PopulateList"
+        android:text="@string/button_text1" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/emailbutton"
+        android:layout_toRightOf="@+id/textProjectInfo"
+        android:text="@string/pothole" 
+        android:onClick="potholeDetected"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/speedvalue"
+        android:layout_marginRight="17dp"
+        android:layout_toLeftOf="@+id/speedvalue"
+        android:text="@string/Speed" />
+
+    <Button
+        android:id="@+id/SmoothRoad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/controlbutton"
+        android:layout_alignLeft="@+id/button3"
+        android:text="@string/SmoothRoad"        
+        android:onClick="SmoothRoadDetected"/>
+
+
+    <Button
+        android:id="@+id/controlbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_alignRight="@+id/textView1"
+        android:onClick="buttonClick"
+        android:text="@string/button_text" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/yvalue"
+        android:text="@string/SpeedBump"         
+        android:onClick="SpeedBumpDetected"/>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/zvalue"
+        android:layout_toRightOf="@+id/emailbutton"
+        android:text="@string/CurbHit"         
+        android:onClick="CurbHitDetected"/>
+
+<RadioGroup 
+        android:id="@+id/radiogroup"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RadioButton
+        android:id="@+id/radioButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onRadioButtonClicked"
+        android:text="@string/HighSpeed" />
+
+    <RadioButton
+        android:id="@+id/radioButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onRadioButtonClicked"
+        android:text="@string/LowSpeed" />
+</RadioGroup>
+
+<Button
+    android:id="@+id/button4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/textProjectInfo"
+    android:layout_alignBottom="@+id/textProjectInfo"
+    android:layout_alignParentLeft="true"
+    android:onClick="PhoneDropDetected"
+    android:text="@string/PhoneDrop" />
+
+</RelativeLayout>

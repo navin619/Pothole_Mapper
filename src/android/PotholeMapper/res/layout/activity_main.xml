@@ -1,0 +1,129 @@
+<!-- Author: Navin Chaganti -->
+<!-- Author: Dhawal Srivastava -->
+<!-- Graduate Student -->
+<!-- Software Engineering Concept -->
+<!-- ECE-573 -->
+<!-- University Of Arizona -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/buttondemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="Demo"
+        android:text="@string/Demo" />
+
+    <Button
+        android:id="@+id/AboutApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:onClick="About"
+        android:text="@string/buttonAboutPotholeMapper" />
+
+    <Button
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttondemo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="TestUpload"
+        android:text="@string/buttonTest" />
+
+    <Button
+        android:id="@+id/process"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/test"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="Process"
+        android:text="@string/buttonProcess"
+/>
+
+    <Button
+        android:id="@+id/choose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonone"
+        android:layout_alignParentLeft="true"
+        android:onClick="FileUpload"
+        android:text="@string/buttonChooseFile" />
+
+    <Button
+        android:id="@+id/buttonfour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/process"
+       android:onClick="Buttonfour"
+        android:text="@string/buttonFour" />
+
+    <Button
+        android:id="@+id/buttontwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/choose"
+        android:layout_toRightOf="@+id/buttonfour"
+        android:onClick="Buttontwo"
+        android:text="@string/buttonTwo" />
+
+    <Button
+        android:id="@+id/buttonthree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/choose"
+        android:onClick="Buttonthree"
+        android:text="@string/buttonThree" />
+
+    <Button
+        android:id="@+id/buttonfive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/process"
+        android:layout_alignParentRight="true"
+        android:onClick="Buttonfive"
+        android:text="@string/buttonFive" />
+
+    <Button
+        android:id="@+id/buttonone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonfour"
+        android:layout_alignParentLeft="true"
+        android:onClick="Buttonone"
+        android:text="@string/buttonOne" />
+
+    <Button
+        android:id="@+id/controlToggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/AboutApp"
+        android:layout_marginTop="26dp"
+        android:onClick="controlToggle"
+        android:text="@string/Start" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/AboutApp"
+        android:gravity="center"
+        android:text="@string/AppName" />
+
+</RelativeLayout>

@@ -1,0 +1,672 @@
+/* Author: Navin Chaganti
+ * Author: Dhawal Srivastava
+ * Graduate Student
+ * Software Engineering Concept
+ * ECE-573
+ * University Of Arizona
+ * */
+package com.example.potholemapper.test;
+
+import java.util.ArrayList;
+
+import com.example.potholemapper.AccelerometerFetch;
+import com.example.potholemapper.MainActivity;
+
+import android.test.ActivityInstrumentationTestCase2;
+import android.test.TouchUtils;
+import android.widget.Button;
+import android.widget.TextView;
+public class hellotest extends ActivityInstrumentationTestCase2<MainActivity> {
+
+	//private static final boolean True = false;
+	MainActivity mActivity;
+	TextView mView;
+	Button check,algo1,algo2,algo3,algo4,algo5,algowhole;
+	String resourceString;
+	AccelerometerFetch As;
+
+	float a,b;
+    ArrayList<Float> Reference1 = new ArrayList<Float>();
+    ArrayList<Float> Processed1 = new ArrayList<Float>();
+    boolean flag= false;
+	@SuppressWarnings("deprecation")
+	public hellotest() {
+		super("com.example.potholemapper", MainActivity.class);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	protected void setUp() throws Exception {        
+		super.setUp();        
+		mActivity = this.getActivity();        
+  mView = (TextView) mActivity.findViewById(com.example.potholemapper.R.id.textView1);
+		check = (Button) mActivity.findViewById(com.example.potholemapper.R.id.test); 
+		algo1 = (Button) mActivity.findViewById(com.example.potholemapper.R.id.buttonone);
+		algo2 = (Button) mActivity.findViewById(com.example.potholemapper.R.id.buttontwo);
+		algo3 = (Button) mActivity.findViewById(com.example.potholemapper.R.id.buttonthree);
+		algo4 = (Button) mActivity.findViewById(com.example.potholemapper.R.id.buttonfour);
+		algo5 = (Button) mActivity.findViewById(com.example.potholemapper.R.id.buttonfive);
+		algowhole = (Button) mActivity.findViewById(com.example.potholemapper.R.id.process);
+		As = new AccelerometerFetch(mActivity);
+		
+		
+		//resourceString = mActivity.getString
+		//		                              (com.example.readtest.R.string.hello);    
+	}
+
+	public void testPreconditions() {
+		assertNotNull(mActivity);
+	}
+	public void test_Checkingalgorithmone() {
+		
+		flag= false;
+
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		///Single tap and wait for 2 seconds
+		TouchUtils.tapView(this, check);
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo1);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Reference1=mActivity.getReference();
+				Processed1=mActivity.getProcessed();
+				int i=0;
+				for(i=0;i<mActivity.Reference.size();i++)
+				{
+					 a = mActivity.Reference.get(i); 
+					 b= mActivity.Processed.get(i) ;
+					if(a > b)
+					{
+						
+						if((a-b) <=0.001)
+						{
+							flag= true;
+						}
+						else{
+							flag = false;
+							break;
+						}
+						
+					}
+					else
+					{
+						if((b-a)<=0.001)
+						{
+							flag= true;
+						}
+						else{
+							flag = false;
+							break;
+						}
+					}
+				}
+				assertEquals(flag, true );
+				
+		
+		///Check for the visibility of the text
+		//assertEquals(View.VISIBLE , check.getVisibility());
+
+	}
+
+	public void test_Checkingalgorithm_two() {
+
+		flag= false;
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		///Single tap and wait for 2 seconds
+		TouchUtils.tapView(this, check);
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo1);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo2);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			//	Reference1=mActivity.getReference();
+			//	Processed1=mActivity.getProcessed();
+				int i=0;
+				for(i=0;i<mActivity.Reference.size();i++)
+				{
+					 a = mActivity.Reference.get(i); 
+					 b= mActivity.Processed.get(i) ;
+					if(a > b)
+					{
+						
+						if((a-b) <=0.001)
+						{
+							flag= true;
+						}
+						else{
+							flag = false;
+							break;
+						}
+						
+					}
+					else
+					{
+						if((b-a)<=0.001)
+						{
+							flag= true;
+						}
+						else{
+							flag = false;
+							break;
+						}
+					}
+				}
+				assertEquals(flag , true );
+				
+		
+		///Check for the visibility of the text
+		//assertEquals(View.VISIBLE , check.getVisibility());
+
+	}
+	
+	public void test_Checkingalgorithm_three() {
+
+		flag= false;
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		///Single tap and wait for 2 seconds
+		TouchUtils.tapView(this, check);
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo1);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo2);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				
+				
+		TouchUtils.tapView(this, algo3);
+	
+			try {
+				synchronized (this) {
+					wait(5000); 
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+				
+				
+				
+				//	Reference1=mActivity.getReference();
+			//	Processed1=mActivity.getProcessed();
+				int i=0;
+				for(i=0;i<mActivity.Reference.size();i++)
+				{
+					 a = mActivity.Reference.get(i); 
+					 b= mActivity.Processed.get(i) ;
+					if(a > b)
+					{
+						
+						if((a-b) <=0.001)
+						{
+							flag= true;
+						}
+						else{
+							flag = false;
+							break;
+						}
+						
+					}
+					else
+					{
+						if((b-a)<=0.001)
+						{
+							flag= true;
+						}
+						else{
+							flag = false;
+							break;
+						}
+					}
+				}
+				assertEquals(flag , true );
+				
+		
+
+		
+		
+	}
+
+	public void test_Checkingalgorithm_four() {
+
+		flag= false;
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		///Single tap and wait for 2 seconds
+		TouchUtils.tapView(this, check);
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo1);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo2);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo3);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo4);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			//	Reference1=mActivity.getReference();
+			//	Processed1=mActivity.getProcessed();
+				int i=0;
+				for(i=0;i<mActivity.Reference.size();i++)
+				{
+					 a = mActivity.Reference.get(i); 
+					 b= mActivity.Processed.get(i) ;
+					if(a > b)
+					{
+						
+						if((a-b) <=0.001)
+						{
+							flag= true;
+						}
+						
+						else{
+							flag = false;
+							break;
+						}
+					}
+					else
+					{
+						if((b-a)<=0.001)
+						{
+							flag= true;
+						}
+						else{
+							flag = false;
+							break;
+						}
+					}
+				}
+				assertEquals(flag  , true );
+				
+		
+		///Check for the visibility of the text
+		//assertEquals(View.VISIBLE , check.getVisibility());
+
+	}
+	
+	public void test_Checkingalgorithm_five() {
+int apot;
+int[] bpot = new int[]{361,368};
+		flag= false;
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		///Single tap and wait for 2 seconds
+		TouchUtils.tapView(this, check);
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo1);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo2);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo3);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo4);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algo5);
+		
+				try {
+					synchronized (this) {
+						wait(4000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			//	Reference1=mActivity.getReference();
+			//	Processed1=mActivity.getProcessed();
+				int i=0;
+				for(i=0;i<mActivity.Pothole.size();i++)
+				{
+					 apot = mActivity.Pothole.get(i); 
+if(apot == bpot[i])
+{
+	flag = true;
+}
+else
+{
+	flag = false;
+	break;
+}
+				}
+				assertEquals(flag  , true );
+				
+		
+		///Check for the visibility of the text
+		//assertEquals(View.VISIBLE , check.getVisibility());
+
+	}
+
+	public void test_Checkingalgorithm_Whole() {
+int apot,cpot = 2;
+int[] bpot = new int[]{361,368};
+		flag= false;
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		///Single tap and wait for 2 seconds
+		TouchUtils.tapView(this, check);
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algowhole);
+		
+				try {
+					synchronized (this) {
+						wait(20000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				int i=0;
+				for(i=0;i<mActivity.Pothole.size();i++)
+				{
+					 apot = mActivity.Pothole.get(i); 
+if(apot == bpot[i])
+{
+	flag = true;
+}
+else
+{
+	flag = false;
+	break;
+}
+				}
+				if(mActivity.Pothole.size() != cpot)
+				{
+					flag = false;
+				}
+				assertEquals(flag  , true );
+				
+		
+		
+	}
+
+
+
+	public void test_Checkinggpsfetch_() {
+double apot  ,cpot;
+double[] latpot = new double[]{45.24,45.24};
+double[] longpot = new double[]{125.96,125.96};
+		flag= false;
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		///Single tap and wait for 2 seconds
+		TouchUtils.tapView(this, check);
+		
+		try {
+			synchronized (this) {
+				wait(2000); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		///Single tap and wait for 2 seconds
+				TouchUtils.tapView(this, algowhole);
+		
+				try {
+					synchronized (this) {
+						wait(20000); 
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				int i=0;
+				for(i=0;i<mActivity.Pothole.size();i++)
+				{
+					 apot = mActivity.gpslat.get(i); 
+					 cpot = mActivity.gpslong.get(i);
+if(apot == latpot[i])
+{
+	flag = true;
+}
+else
+{
+	flag = false;
+	break;
+}
+if( cpot == longpot[i])
+{
+	flag = true;
+}
+else
+{
+	flag = false;
+	break;
+}
+				}
+				assertEquals(flag  , true );
+				
+		
+		
+	}
+
+
+}

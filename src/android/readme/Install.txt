@@ -1,0 +1,50 @@
+/* Author: Dhawal Srivastava
+ * Graduate Student
+ * Software Engineering Concept
+ * ECE-573
+ * University Of Arizona
+ * */
+
+Application Installation
+
+
+Following steps should be followed while compiling the source code on an eclipse machine
+
+
+Precondition.
+
+You need to have Android Support library appcompat v7 and google_play_services lib in order to sucessfully build this code.
+If you don't have that, install it from SDK manager.
+
+Steps for installation.
+
+1.	Checkout the whole folder c2d from SVN location trunk/ to your local computer directory root.
+
+2.	Open the eclipse  and set the work space as root/src/android.
+
+3.	Fetch project PotholeMapper and Potholetest.(if you want to compile DataGatherer check out that project as well. dataGatherer app was used to gather initial data).
+
+4.  Next, import both the support libraries to your project. appcompat_v7 and google_play_services. You don't need to add suplement libraries that come along with appcompact bundle. But be sure to checkout v7.
+
+5.  After that add these libraries to PotholeMapper project (and DataGatherer, if you checked have out this app). If the android properties shows that libraries are already added, remove it and add from your local location.
+
+6.	If facing issue with any project while building perform following steps
+
+	6.1. Right Click on the project and go to properties.
+
+	6.2. Go to java Build path
+
+	6.3. Check if Android 4.4.2 is marked. If it is marked then unmark it and apply. Open Java build path and mark it again.
+
+	6.4 If Android 4.4.2 is not marked. Mark it.
+
+	6.5 If Android 4.4.2 is not present then click on unable to find libraries and apply. Open Java build path and mark Android 4.4.2.
+
+	6.6 If still not able to build then update the ADT. 
+
+	Note: If you are further interested in playing with the map plotting functionality refer to GoogleMap.docx in the same folder before starting to build the functionality. The app should build regardless of this step.
+
+7.	Connect your device to the system and run Potholetest project to check correct functionality of the PotholeMapper application.
+
+8.	Enjoy the app.
+

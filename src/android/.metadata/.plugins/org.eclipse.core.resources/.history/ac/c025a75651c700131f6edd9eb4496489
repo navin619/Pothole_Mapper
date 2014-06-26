@@ -1,0 +1,366 @@
+/* Author: Dhawal Srivastava
+ * Graduate Student
+ * Software Engineering Concept
+ * ECE-573
+ * University Of Arizona
+ * */
+
+package com.example.potholemapper;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Environment;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
+
+public class AccelerometerFetch implements SensorEventListener {
+	/* Array List for Holding Values of Float and Double*/
+	ArrayList<Float> alXValuesAccelerometer = new ArrayList<Float>();
+	ArrayList<Float> alYValuesAccelerometer = new ArrayList<Float>();
+	ArrayList<Float> alZValuesAccelerometer = new ArrayList<Float>();
+	ArrayList<Float> alXValuesFile = new ArrayList<Float>();
+	ArrayList<Float> alYValuesFile = new ArrayList<Float>();
+	ArrayList<Float> alZValuesFile = new ArrayList<Float>();
+	ArrayList<Float> alZProcessOne = new ArrayList<Float>();
+	ArrayList<Float> alXProcessTwo = new ArrayList<Float>();
+	ArrayList<Float> alZProcessThree = new ArrayList<Float>();
+	ArrayList<Float> alXProcessFour = new ArrayList<Float>();
+	ArrayList<Double> alSpeedGps = new ArrayList<Double>();
+	ArrayList<Double> alLatGps = new ArrayList<Double>();
+	ArrayList<Double> alLongGps = new ArrayList<Double>();
+	ArrayList<Double> alSpeedFile = new ArrayList<Double>();
+	ArrayList<Double> alLatFile = new ArrayList<Double>();
+	ArrayList<Double> alLongFile = new ArrayList<Double>();
+	ArrayList<Integer> alZPotholeEvent = new ArrayList<Integer>();
+	String FileNameFromPopUp;
+	SignalProcessor sp;
+	Gps gps;
+	String root = Environment.getExternalStorageDirectory().getPath();
+	String extention = "/PotholeMapper/";
+	boolean bFlag;
+	File myDir = new File(root + extention);	
+	float x, y, z;
+	int iIndex = 0, iLoop1;
+	private int iStartFlag = 0;
+	Context MainContext;
+	public AccelerometerFetch (Context context){
+
+MainContext = context;
+		SensorManager sensorManager;
+		sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+		sensorManager.registerListener(this,
+				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+				SensorManager.SENSOR_DELAY_GAME);
+		sp = new SignalProcessor(this);
+		gps = new Gps(this);
+//Toast.makeText(context, "Accelerometer object Created", Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onAccuracyChanged(Sensor arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void FetchStart() {
+		iStartFlag = 1;
+	alXValuesAccelerometer.clear();	
+	alYValuesAccelerometer.clear();	
+	alZValuesAccelerometer.clear();	
+	iIndex = 0;
+	Toast.makeText(MainContext, "App Started", Toast.LENGTH_SHORT).show();	
+	}
+	
+	public void FetchStop() {
+		iStartFlag = 0;
+
+		try {
+
+			if (!myDir.exists()) {
+				myDir.mkdirs();
+
+			}
+			/* Creating the file name based on the file track number */
+			String fname = "Accelerometer_Data.txt";
+		//	iTrackNo++;
+	//		WriteToInternalFile(iTrackNo);
+			File file = new File(myDir, fname);
+			FileOutputStream fOutputFile = new FileOutputStream(file);
+			OutputStreamWriter outStreamWriter = new OutputStreamWriter(
+					fOutputFile);
+			iIndex = alXValuesAccelerometer.size();
+			/*
+			 * Writing the time stamp inside the file displaying the time the
+			 * file is created
+			 */
+//			String format = "MM/dd/yyyy @ HH:mm:ss";
+//			SimpleDateFormat dateFormat = new SimpleDateFormat(format,
+//					Locale.US);
+
+//			outStreamWriter.write("% Generated on "
+//					+ dateFormat.format(new Date()) + "\n");
+//			/* Writing the Name of the Student */
+//			outStreamWriter.write("% By Dhawal Srivastava - PotHole - Smooth Road - CurbHit - PhoneDrop - SpeedBump - Speed\n");
+
+			for (iLoop1 = 0; iLoop1 < iIndex; iLoop1++) {
+				
+				outStreamWriter.write(alXValuesAccelerometer.get(iLoop1).toString() + "\t"
+						+ alYValuesAccelerometer.get(iLoop1).toString() + "\t"
+						+ alZValuesAccelerometer.get(iLoop1).toString() + "\t"  
+						+ alLatGps.get(iLoop1).toString() + "\t"
+						+ alLongGps.get(iLoop1).toString() + "\t"
+						+ alSpeedGps.get(iLoop1).toString() + "\n" );
+			}
+			outStreamWriter.flush();
+			outStreamWriter.close();
+//			RecordTopic.setText("Data Saved Under File Name: " + fname);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//Toast.makeText(MainContext, "App Stopped", Toast.LENGTH_SHORT).show();	
+	
+	}
+	
+	public void Process() {
+		sp.firstProcessing();
+		sp.secondProcessing();
+		sp.thirdProcessing();
+		sp.fourthProcessing();
+		sp.fifthProcessing();
+	}
+	
+	public void StepOne() {
+	sp.firstProcessing();
+	}
+	public void StepTwo() {
+		
+	sp.secondProcessing();
+	}
+	public void StepThree() {
+	sp.thirdProcessing();
+	}
+	public void StepFour() {
+	sp.fourthProcessing();
+	}
+	public void StepFive() {
+	sp.fifthProcessing();
+	}
+
+	/* Method called to get the list of all files present in the folder */
+	public ArrayList<String> GetFiles(String DirectoryPath) {
+		ArrayList<String> MyFiles = new ArrayList<String>();
+		File fileDir = new File(DirectoryPath);
+		File[] files = fileDir.listFiles();
+		if (files.length == 0) {
+
+//			//Toast.makeText(
+//					MainContext,
+//					"No data found. Go back and click on Start/Stop to generate new files",
+//					Toast.LENGTH_LONG).show();
+
+			return MyFiles;
+		} else {
+			for (iLoop1 = 0; iLoop1 < files.length; iLoop1++) {
+				/* Listing all .txt files */
+				String[] separated = files[iLoop1].getName().split("\\.");
+				if (separated[1].equals("txt")) {
+					MyFiles.add(files[iLoop1].getName());
+				}
+			}
+			return MyFiles;
+		}
+	}
+
+	public void FilePopulate(){
+	if (myDir.exists()) {
+		final ArrayList<String> FilesInFolder = GetFiles(myDir
+				.getAbsolutePath());
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainContext,
+				android.R.layout.simple_list_item_1, FilesInFolder);
+		/*
+		 * Generating alert dialog object for listing files available to be
+		 * mailed
+		 */
+		AlertDialog.Builder builder = new AlertDialog.Builder(MainContext);
+		builder.setTitle("List of files to be used for processing.");
+		builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int item) {
+
+				FileNameFromPopUp = FilesInFolder.get(item);
+				SelectFileApp();
+			}
+		});
+
+		AlertDialog alert = builder.create();
+		alert.show();
+	} else {
+		/* Generating alert dialog object for no folder use case */
+		AlertDialog.Builder alert = new AlertDialog.Builder(MainContext);
+		alert.setTitle("Folder Doesn't Exist!");
+		alert.setMessage("Either you have just installed the app or someone has deleted the folder and previous data. Click on Start/Stop to generate new data.");
+		alert.setPositiveButton("OK", null);
+		alert.show();
+	}
+}
+	
+	public void AppRun() {
+		FilePopulate();
+	
+}
+
+public void AppTest() {
+	SelectFileTest();
+
+}
+	
+	public void SelectFileApp() {
+		alXValuesFile.clear();
+		alYValuesFile.clear();
+		alZValuesFile.clear();
+		alLatFile.clear();
+		alLongFile.clear();
+		alSpeedFile.clear();
+		
+		String TextFileName = 	FileNameFromPopUp;
+			String filename = myDir.getAbsolutePath() + "/" + TextFileName;
+		try {
+
+			BufferedReader bufferedReaderApp = new BufferedReader(new FileReader(
+					new File(filename)));
+			//Toast.makeText(MainContext, "Index Value from Choos: " + iIndex , Toast.LENGTH_SHORT).show();	
+			String read;
+
+			while ((read = bufferedReaderApp.readLine()) != null) {
+				/* Dis-regarding the lines which starts with '%' */
+				if (read.charAt(0) != '%') {
+					/* Splitting the read line by single tab */
+					String[] separated = read.split("\t");
+					alXValuesFile.add(Float.parseFloat(separated[1]));
+					alYValuesFile.add(Float.parseFloat(separated[0]));
+					alZValuesFile.add(Float.parseFloat(separated[2]));
+					alLatFile.add(Double.parseDouble(separated[3]));
+					alLongFile.add(Double.parseDouble(separated[4]));
+					alSpeedFile.add(Double.parseDouble(separated[5]));
+				}
+			//	Toast.makeText(MainContext, "File Fetched", Toast.LENGTH_SHORT).show();
+				bFlag = true;
+			}
+			bufferedReaderApp.close();
+			iIndex = alXValuesFile.size();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+		}
+
+	}
+
+	
+	public void SelectFileTest() {
+		alXValuesFile.clear();
+		alYValuesFile.clear();
+		alZValuesFile.clear();
+		alLatFile.clear();
+		alLongFile.clear();
+		alSpeedFile.clear();
+		alZProcessOne.clear();
+		alXProcessTwo.clear();
+		alZProcessThree.clear();
+		alXProcessFour.clear();
+		
+		InputStream inputStream = MainContext.getResources().openRawResource(R.raw.accelerometerraw);
+		InputStream inputStream1 = MainContext.getResources().openRawResource(R.raw.acclerometerprocessfull);
+try {
+        InputStreamReader inputreader = new InputStreamReader(inputStream);
+        InputStreamReader inputreader1 = new InputStreamReader(inputStream1);
+        BufferedReader bufferedReader = new BufferedReader(inputreader);
+        BufferedReader bufferedReader1 = new BufferedReader(inputreader1);
+        String line;
+        String line1;
+
+		while ((line = bufferedReader.readLine()) != null) {
+			/* Dis-regarding the lines which starts with '%' */
+			if (line.charAt(0) != '%') {
+				/* Splitting the read line by single tab */
+				String[] separated = line.split("\t");
+				alXValuesFile.add(Float.parseFloat(separated[1]));
+				alYValuesFile.add(Float.parseFloat(separated[0]));
+				alZValuesFile.add(Float.parseFloat(separated[2]));
+				alLatFile.add(Double.parseDouble(separated[3]));
+				alLongFile.add(Double.parseDouble(separated[4]));
+				alSpeedFile.add(Double.parseDouble(separated[5]));
+			}
+		}
+		bufferedReader.close();
+		iIndex = alXValuesFile.size();
+		while ((line1 = bufferedReader1.readLine()) != null) {
+			/* Dis-regarding the lines which starts with '%' */
+			if (line1.charAt(0) != '%') {
+				/* Splitting the read line by single tab */
+				String[] separated = line1.split("\t");
+				alZProcessOne.add(Float.parseFloat(separated[0]));
+				alXProcessTwo.add(Float.parseFloat(separated[1]));
+				alZProcessThree.add(Float.parseFloat(separated[2]));
+				alXProcessFour.add(Float.parseFloat(separated[3]));
+				}
+		}
+		bufferedReader.close();
+		iIndex = alXValuesFile.size();
+		bFlag = true;	
+} 
+	catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally {
+	//	Toast.makeText(MainContext, "File Fetched", Toast.LENGTH_SHORT).show();	
+		
+	}
+
+}
+
+
+	
+	
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		// TODO Auto-generated method stub
+		
+		if ((event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) && (iStartFlag == 1))
+		{
+			//Toast.makeText(MainContext, "Recording Started", Toast.LENGTH_SHORT).show();	
+			
+			/* Taking data for X Y and Z axis */
+			x = event.values[0];
+			y = event.values[1];
+			z = event.values[2];
+			alXValuesAccelerometer.add(x);
+			alYValuesAccelerometer.add(y);
+			alZValuesAccelerometer.add(z);
+		alSpeedGps.add(gps.speed);
+		alLatGps.add(gps.latitude);
+		alLongGps.add(gps.longitude);
+iIndex++;
+		}
+
+	}
+
+}

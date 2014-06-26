@@ -1,0 +1,262 @@
+/* Author: Dhawal Srivastava
+ * Author: Navin Chaganti
+ * Graduate Student
+ * Software Engineering Concept
+ * ECE-573
+ * University Of Arizona
+ * */
+
+package com.example.potholemapper;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+
+public class MainActivity extends Activity {
+	Button controlToggle;
+	Button buttonOne;
+	Button buttonTwo;
+	Button buttonThree;
+	Button buttonFour;
+	Button buttonFive;
+	Button buttonTest;
+	Button buttonRun;
+	Button buttonProcess;
+	TextView zValue;
+	AccelerometerFetch As;
+	PopulatePopUp Pop;
+	int iLoop1 = 0;
+	ArrayList<RoadEvent> RoadEventList = new ArrayList<RoadEvent>();
+    public ArrayList<Float> Reference = new ArrayList<Float>();
+    public ArrayList<Float> Processed = new ArrayList<Float>();
+    public ArrayList<Integer> Pothole = new ArrayList<Integer>();
+    public ArrayList<Double> gpslat = new ArrayList<Double>();
+    public ArrayList<Double> gpslong = new ArrayList<Double>();
+    
+	@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+               
+        As = new AccelerometerFetch(this);
+        Pop = new PopulatePopUp(this);
+        zValue = (TextView) findViewById(R.id.textView1);
+        controlToggle = (Button) findViewById(R.id.controlToggle);
+        buttonOne = (Button) findViewById(R.id.buttonone);
+        buttonTwo = (Button) findViewById(R.id.buttontwo);
+        buttonThree = (Button) findViewById(R.id.buttonthree);
+        buttonFour = (Button) findViewById(R.id.buttonfour);
+        buttonFive = (Button) findViewById(R.id.buttonfive);
+        buttonTest = (Button) findViewById(R.id.test);
+        buttonRun = (Button) findViewById(R.id.choose);
+buttonProcess = (Button)  findViewById(R.id.process);
+    }
+
+	public ArrayList<Float> getReference()
+	{
+		return Reference;
+	}
+	
+	public ArrayList<Float> getProcessed()
+	{
+		return Processed;
+	}
+	
+    public void TestUpload(View view) {
+    	As.AppTest();
+    	if(As.bFlag){
+    		As.bFlag = false;
+        	buttonOne.setVisibility(View.INVISIBLE);
+        	buttonTwo.setVisibility(View.INVISIBLE);
+        	buttonThree.setVisibility(View.INVISIBLE);
+        	buttonFour.setVisibility(View.INVISIBLE);
+        	buttonFive.setVisibility(View.INVISIBLE);
+        	buttonProcess.setVisibility(View.INVISIBLE);
+
+    		buttonOne.setVisibility(View.VISIBLE);
+    	buttonProcess.setVisibility(View.VISIBLE);
+    }
+    }
+    
+    public void FileUpload(View view) {
+    	As.AppRun();
+    	if(As.bFlag){
+    		As.bFlag = false;
+        	buttonOne.setVisibility(View.INVISIBLE);
+        	buttonTwo.setVisibility(View.INVISIBLE);
+        	buttonThree.setVisibility(View.INVISIBLE);
+        	buttonFour.setVisibility(View.INVISIBLE);
+        	buttonFive.setVisibility(View.INVISIBLE);
+        	buttonProcess.setVisibility(View.INVISIBLE);
+
+    		buttonOne.setVisibility(View.VISIBLE);
+    	buttonProcess.setVisibility(View.VISIBLE);
+    }
+    }
+
+    public void Process(View view) {
+    	As.Process();
+    	 RoadEventStore();
+    	 for(iLoop1 = 0;iLoop1<As.alZPotholeEvent.size();iLoop1++)
+    	 {
+    	 	Pothole.add(As.alZPotholeEvent.get(iLoop1));
+    	 	gpslat.add(As.alLatFile.get(As.alZPotholeEvent.get(iLoop1)));
+    	 	gpslong.add(As.alLongFile.get(As.alZPotholeEvent.get(iLoop1)));
+    	 	
+    	 }
+    	 buttonFive.setVisibility(View.INVISIBLE);
+    	    
+    }
+    
+    public void About(View view){
+    	Toast.makeText(this, "secondProcessing: ", Toast.LENGTH_SHORT).show();	
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(
+				"The App Pothole Mapper is developed by: \nDhawal Srivastava and Navin Chaganti\nUniversity Of Arizona\nGroup Name: Droiders")
+				.setCancelable(false)
+				/* Giving choices to user */
+
+		.setPositiveButton("Got it!",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+					}
+				});
+		AlertDialog alert = builder.create();
+		alert.show();
+
+    }
+    
+    public void controlToggle(View view) {
+    	if(controlToggle.getText().toString().equals("Start")) {
+    	As.FetchStart();
+    	//Toast.makeText(this, "Button Pressed: " + As.alZValues.get(iLoop).toString(), Toast.LENGTH_SHORT).show();
+    	//iLoop++;
+    	controlToggle.setText("Stop");
+    	buttonRun.setVisibility(View.INVISIBLE);
+    	buttonTest.setVisibility(View.INVISIBLE);
+    	buttonOne.setVisibility(View.INVISIBLE);
+    	buttonTwo.setVisibility(View.INVISIBLE);
+    	buttonThree.setVisibility(View.INVISIBLE);
+    	buttonFour.setVisibility(View.INVISIBLE);
+    	buttonFive.setVisibility(View.INVISIBLE);
+    	buttonProcess.setVisibility(View.INVISIBLE);
+}
+    	else {
+    		As.FetchStop();
+        	controlToggle.setText("Start");
+        	buttonTest.setVisibility(View.VISIBLE);
+        	buttonRun.setVisibility(View.VISIBLE);
+   	}
+    }
+
+    public void Buttonone(View view) {
+    	As.StepOne();
+    	Reference.clear();
+    	Processed.clear();
+for(iLoop1 =0;iLoop1<As.iIndex;iLoop1++)
+{
+	Reference.add(As.alZProcessOne.get(iLoop1));
+	Processed.add(As.sp.alZFilteredOutputValues.get(iLoop1));
+}
+    	buttonTwo.setVisibility(View.VISIBLE);
+    	buttonOne.setVisibility(View.INVISIBLE);
+    	buttonProcess.setVisibility(View.INVISIBLE);
+
+    }
+
+    public void Buttontwo(View view) {
+ As.StepTwo();    
+	Reference.clear();
+	Processed.clear();
+for(iLoop1 =0;iLoop1<As.iIndex;iLoop1++)
+{
+Reference.add(As.alXProcessTwo.get(iLoop1));
+Processed.add(As.sp.alXFilteredOutputValues.get(iLoop1));
+}
+	buttonTwo.setVisibility(View.INVISIBLE);
+	buttonThree.setVisibility(View.VISIBLE);
+ }
+
+    public void Buttonthree(View view) {
+    	As.StepThree();    
+	Reference.clear();
+	Processed.clear();
+for(iLoop1 =0;iLoop1<As.iIndex;iLoop1++)
+{
+Reference.add(As.alZProcessThree.get(iLoop1));
+Processed.add(As.sp.alZMatchedOutputValues.get(iLoop1));
+
+}
+
+	buttonFour.setVisibility(View.VISIBLE);
+	buttonThree.setVisibility(View.INVISIBLE);
+ }
+
+    public void Buttonfour(View view) {
+ As.StepFour();    
+	Reference.clear();
+	Processed.clear();
+for(iLoop1 =0;iLoop1<As.iIndex;iLoop1++)
+{
+Reference.add(As.alXProcessFour.get(iLoop1));
+Processed.add(As.sp.alXMatchedOutputValues.get(iLoop1));
+}
+	buttonFive.setVisibility(View.VISIBLE);
+	buttonFour.setVisibility(View.INVISIBLE);
+}
+    
+    public void Buttonfive(View view) {
+ As.StepFive();
+ RoadEventStore();
+for(iLoop1 = 0;iLoop1<As.alZPotholeEvent.size();iLoop1++)
+{
+	Pothole.add(As.alZPotholeEvent.get(iLoop1));
+}
+buttonFive.setVisibility(View.INVISIBLE);
+   
+    }
+
+  public void RoadEventStore(){
+	  Toast.makeText(this, "Road Event Called ", Toast.LENGTH_SHORT).show();
+  	
+	  for(iLoop1 = 0;iLoop1<As.alZPotholeEvent.size();iLoop1++)
+{
+	RoadEventList.add(new RoadEvent(Pop.PopUp(),As.alLatFile.get(As.alZPotholeEvent.get(iLoop1)),As.alLongFile.get(As.alZPotholeEvent.get(iLoop1)),0,As.alSpeedFile.get(As.alZPotholeEvent.get(iLoop1))));
+//	Toast.makeText(this, "Button 5 Pressed: " + As.alZPotholeEvent.get(iLoop1).toString(), Toast.LENGTH_SHORT).show();
+	
+}
+	  
+  }  
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

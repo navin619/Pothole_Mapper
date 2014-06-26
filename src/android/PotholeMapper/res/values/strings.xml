@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PotholeMapper</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+ <string name="AppName">Pothole Mapper</string>
+    <string name="Start">Start</string>
+   <string name="textview1">Steps For Filter</string>
+<string name="buttonOne">Step One</string>
+<string name="buttonTwo">Step Two</string>
+<string name="buttonThree">Step Three</string>
+<string name="buttonFour">Step Four</string>
+<string name="buttonFive">Step Five</string>
+<string name="buttonAboutPotholeMapper">About Pothole Mapper</string>
+<string name="buttonProcess">Process</string>
+<string name="buttonChooseFile">Choose File</string>
+<string name="buttonTest">Test Initiate</string>
+<string name="Test">Testing</string>
+<string name="DemoTitle">Demo Mode</string>
+<string name="Demo">Demo</string>
+<string name="Finish">Finish</string>
+<string name="Speedincr">Faster</string>
+<string name="SmoothRoad">Smooth Road</string>
+<string name="SpeedBump">Speed Bump</string>
+<string name="Pothole">Pothole</string>
+<string name="Break">Break</string>
+<string name="PhoneDrop">Phone Drop</string>
+<string name="GPSLat">Latitude</string>
+<string name="Speed">Speed</string>
+<string name="Speeddecr">Slower</string>
+<string name="GPSIncrement">Move Around</string>
+<string name="GPSLong">Longitude</string>
+
+</resources>
